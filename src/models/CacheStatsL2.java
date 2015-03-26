@@ -11,4 +11,18 @@ package models;
  */
 public class CacheStatsL2 extends CacheStats{
     private long writeHits;
+
+    /**
+     * @param writeHits the writeHits to set
+     */
+    public void setWriteHits(long writeHits) {
+        this.writeHits = writeHits;
+    }
+
+    /**
+     * @return the writeHits
+     */
+    public long getWriteHits() {
+        return writeHits;
+    }
 }
