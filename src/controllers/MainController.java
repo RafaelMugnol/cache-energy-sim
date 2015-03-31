@@ -161,6 +161,7 @@ public class MainController {
                 while (buff.ready()) {
                     linha = buff.readLine();
                     //l2
+                    cL2.setWriteMiss();//inicializado com 0
                     if (linha.contains("system.l2.ReadReq_hits::total")) {
                         String[] array = (linha.split("total")[1]).split("#");
                         String t = array[0].trim();
@@ -608,11 +609,12 @@ public class MainController {
 
     public void calcula(){
         double readL1D, readL1I, writeL1D, readL2, writeL2, tEnergy;
+        
         readL1D = (cL1D.getReadHits()*cL1D.cPar.getrEnergy() + (cL1D.getReadMisses()*(cL1D.cPar.getrEnergy() + cL1D.cPar.getwEnergy())));
         readL1I = (cL1I.getReadHits()*cL1I.cPar.getrEnergy() + (cL1I.getReadMisses()*(cL1I.cPar.getrEnergy() + cL1I.cPar.getwEnergy())));
         writeL1D = (cL1D.getWriteHits() * cL1D.cPar.getrEnergy() + (cL1D.getWriteMisses() * (cL1D.cPar.getwEnergy() + cL1D.cPar.getrEnergy())));
         readL2 = (cL2.getReadHits()*cL2.cPar.getrEnergy() + (cL2.getReadMisses()*(cL2.cPar.getrEnergy() + cL2.cPar.getwEnergy())));
-        writeL2 = (cL2.getWriteHits() * cL2.cPar.getrEnergy() + (cL2.getWriteMisses() * (cL2.cPar.getwEnergy() + cL2.cPar.getrEnergy())));
+        writeL2 = (cL2.getWriteHits() * cL2.cPar.getrEnergy() + (cL2.getWriteMiss() * (cL2.cPar.getwEnergy() + cL2.cPar.getrEnergy())));
     
         tEnergy = (readL1D + readL1I + writeL1D + readL2 + writeL2);
     }

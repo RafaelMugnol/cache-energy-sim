@@ -10,8 +10,8 @@ package models;
  * @author Rafael
  */
 public class CacheStatsL2 extends CacheStats{
-    private long writeHits;
-
+    private long writeHits, writeMiss;
+    
     /**
      * @param writeHits the writeHits to set
      */
@@ -24,5 +24,19 @@ public class CacheStatsL2 extends CacheStats{
      */
     public long getWriteHits() {
         return writeHits;
+    }
+
+    /**
+     * @return the writeMiss
+     */
+    public long getWriteMiss() {
+        return writeMiss;
+    }
+
+    /**
+     * @param writeMiss the writeMiss to set
+     */
+    public void setWriteMiss() {
+        this.writeMiss = 0;
     }
 }

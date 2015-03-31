@@ -44,9 +44,9 @@ Data array cell type          : 4
     Write Energy (nJ): 0.0414834
 
     Precharge Energy (nJ): 0.0316549
-    Leakage Power Closed Page (mW): 0.39616
-    Leakage Power Open Page (mW): 0.693652
-    Leakage Power I/O (mW): 0.691852
+    +Leakage Power Closed Page (mW): 0.39616
+    +Leakage Power Open Page (mW): 0.693652
+    +Leakage Power I/O (mW): 0.691852
     Refresh power (mW): 6.92249e-05
     Cache height x width (mm): 0.266179 x 0.147025*/
 

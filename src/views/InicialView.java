@@ -221,8 +221,11 @@ public class InicialView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     public int showFileChooserDialog(FileNameExtensionFilter filtro) {
         fChooser.setAcceptAllFileFilterUsed(false);
+        
         fChooser.addChoosableFileFilter(filtro);
-        return fChooser.showOpenDialog(InicialView.this);
+        int r = fChooser.showOpenDialog(InicialView.this);
+        fChooser.removeChoosableFileFilter(filtro);
+        return r;
     }
 
     public File getSelectedFile() {
