@@ -18,7 +18,7 @@ import models.CacheParameters;
  * @author Rafael
  */
 public class MainView extends javax.swing.JFrame {
-
+    
     private MainController controller;
     private JFileChooser fChooser;
 
@@ -30,7 +30,7 @@ public class MainView extends javax.swing.JFrame {
     public MainView(MainController cont, String mat[][]) {
         this.controller = cont;
         this.fChooser = new JFileChooser();
-
+        
         initComponents();
         this.preencheDados(mat);
     }
@@ -80,7 +80,7 @@ public class MainView extends javax.swing.JFrame {
         l1is = new javax.swing.JLabel();
         l1ic = new javax.swing.JTextField();
         l1io = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        calc = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -468,11 +468,12 @@ public class MainView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Calcular");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        calc.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        calc.setText("Calcular");
+        calc.setEnabled(false);
+        calc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                calcActionPerformed(evt);
             }
         });
 
@@ -505,7 +506,7 @@ public class MainView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(calc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -520,7 +521,7 @@ public class MainView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addComponent(calc, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -542,27 +543,33 @@ public class MainView extends javax.swing.JFrame {
 
     private void l1ioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_l1ioActionPerformed
         controller.escArquivoL1I();
+        l2c.setEnabled(true);
+        
     }//GEN-LAST:event_l1ioActionPerformed
 
     private void l2oActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_l2oActionPerformed
         controller.escArquivoL2();
+        calc.setEnabled(true);
     }//GEN-LAST:event_l2oActionPerformed
 
     private void l1doActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_l1doActionPerformed
         controller.escArquivoL1D();
+        
+        l1io.setEnabled(true);
     }//GEN-LAST:event_l1doActionPerformed
 
     private void l1dcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_l1dcActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_l1dcActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void calcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcActionPerformed
+        
+        new FinalView(controller.returnEnergy(), controller);
+    }//GEN-LAST:event_calcActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton calc;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel46;
@@ -611,15 +618,21 @@ public class MainView extends javax.swing.JFrame {
         fChooser.addChoosableFileFilter(filtro);
         return fChooser.showOpenDialog(MainView.this);
     }
-
+    public int showFileSaveDialog(FileNameExtensionFilter filtro){
+        fChooser.setAcceptAllFileFilterUsed(false);
+        fChooser.addChoosableFileFilter(filtro);
+        return fChooser.showSaveDialog(MainView.this);
+    }
+    
+    
     public File getSelectedFile() {
         return fChooser.getSelectedFile();
     }
-
+    
     public void manssageDialog(String s) {
         JOptionPane.showMessageDialog(this, s);
     }
-
+    
     public void preencheDados(String mat[][]) {
         if (mat.length >= 1) {
             l1t.setText("Type: " + mat[0][0]);
@@ -634,13 +647,11 @@ public class MainView extends javax.swing.JFrame {
                 l1ib.setText("Block Size: " + mat[1][2]);
                 l1ia.setText("Assoc: " + mat[1][3]);
                 l1ic.setEnabled(true);
-                l1io.setEnabled(true);
                 if (mat.length >= 3) {
                     l2t.setText("Type: " + mat[2][0]);
                     l2s.setText("Size: " + mat[2][1]);
                     l2b.setText("Block Size: " + mat[2][2]);
                     l2a.setText("Assoc: " + mat[2][3]);
-                    l2c.setEnabled(true);
                     l2o.setEnabled(true);
                     if (mat.length >= 4) {
                         l3t.setText("Type: " + mat[3][0]);

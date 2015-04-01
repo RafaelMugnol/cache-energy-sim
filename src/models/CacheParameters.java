@@ -59,6 +59,9 @@ public class CacheParameters {
 
     
     
+    public double somaLeakage(){
+        return(powerClosedPage + powerOpenPage +  powerIO);
+    }
     
     public double getCacheSize() {
         return cacheSize;
