@@ -6,6 +6,9 @@
 package views;
 
 import controllers.MainController;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -43,7 +46,7 @@ public class FinalView extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Dados da Memória");
 
         jb1.setText("Save");
@@ -100,7 +103,11 @@ public class FinalView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb1ActionPerformed
-        controller.save();
+        try {
+            controller.save();
+        } catch (IOException ex) {
+            Logger.getLogger(FinalView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jb1ActionPerformed
 
     /**

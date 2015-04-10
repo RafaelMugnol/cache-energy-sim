@@ -543,8 +543,8 @@ public class MainView extends javax.swing.JFrame {
 
     private void l1ioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_l1ioActionPerformed
         controller.escArquivoL1I();
-        l2c.setEnabled(true);
-        
+        l2o.setEnabled(true);
+       
     }//GEN-LAST:event_l1ioActionPerformed
 
     private void l2oActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_l2oActionPerformed
@@ -564,7 +564,7 @@ public class MainView extends javax.swing.JFrame {
 
     private void calcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcActionPerformed
         
-        new FinalView(controller.returnEnergy(), controller);
+        new FinalView(controller.returnEnergy(), controller).setVisible(true);
     }//GEN-LAST:event_calcActionPerformed
 
 
@@ -652,7 +652,7 @@ public class MainView extends javax.swing.JFrame {
                     l2s.setText("Size: " + mat[2][1]);
                     l2b.setText("Block Size: " + mat[2][2]);
                     l2a.setText("Assoc: " + mat[2][3]);
-                    l2o.setEnabled(true);
+                    l2c.setEnabled(true);
                     if (mat.length >= 4) {
                         l3t.setText("Type: " + mat[3][0]);
                         l3s.setText("Size: " + mat[3][1]);

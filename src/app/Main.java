@@ -19,11 +19,12 @@ public class Main {
                     + "--help  -> Help\n"
                     + "--config=...  -> File configuration memory\n"
                     + "--stats=...  -> File stats memory\n"
-                    + "--out=...  -> Name of the final file\n\n"
+                    + "--out=...  -> Name of the final file\n"
+                    + "--outPath=... -> Path to save\n\n"
                     + "Order:\n"
                     + "    1º -> Parameters L1 data\n"
                     + "    2º -> Parameters L1 instructions\n"
-                    + "    2º -> Parameters L2\n");
+                    + "    3º -> Parameters L2\n");
         } 
     }
 

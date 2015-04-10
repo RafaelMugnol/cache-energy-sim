@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package models;
 
 import java.io.BufferedReader;
@@ -398,11 +394,7 @@ public class CacheMemory {
                 } else if (linha.contains("Technology")) {
                     String[] array = linha.split(":");
                     cL1I.cPar.setTechnology(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("cache type")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setCacheType(Double.parseDouble(array[array.length - 1]));
-                }
-
+                } 
             }
         } catch (FileNotFoundException ex) {
 
@@ -503,9 +495,6 @@ public class CacheMemory {
                 } else if (linha.contains("Technology")) {
                     String[] array = linha.split(":");
                     cL2.cPar.setTechnology(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("cache type")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setCacheType(Double.parseDouble(array[array.length - 1]));
                 }
 
             }
@@ -555,15 +544,16 @@ public class CacheMemory {
     }
 
     public void salvaArquivo(File file) throws IOException {
-        FileWriter w = new FileWriter(file);;
+        FileWriter w = new FileWriter(file.getPath());
         BufferedWriter escreve = new BufferedWriter(w);
-
+        //String str;
+        //str.replace('.', ',');
         escreve.write(" ; Dynamic Read; Dynamic Write; Dynamic Total; Leakage (Static)");
-        escreve.write("L1D; " + readL1D + "; " + writeL1D + "; " + (readL1D + writeL1D) + "; " + cL1D.cPar.somaLeakage());
-        escreve.write("L1I; " + readL1I + "; ; " + (readL1I) + "; " + cL1I.cPar.somaLeakage());
-        escreve.write("L1Total; " + (readL1D + readL1I) + "; " + writeL1D + "; " + (readL1D + writeL1D + readL1I) + "; " + (cL1D.cPar.somaLeakage() + cL1I.cPar.somaLeakage()));
-        escreve.write("L2; " + readL2 + "; " + writeL2 + "; " + (readL2 + writeL2) + "; " + cL2.cPar.somaLeakage());
-        escreve.write("Total; " + (readL1D + readL1I + readL2) + "; " + (writeL1D + writeL2) + "; " + (readL1D + writeL1D + readL1I + readL2 + writeL2) + "; " + (cL1D.cPar.somaLeakage() + cL1I.cPar.somaLeakage() + cL2.cPar.somaLeakage()));
+        escreve.write(("\nL1D; " + readL1D + "; " + writeL1D + "; " + (readL1D + writeL1D) + "; " + cL1D.cPar.somaLeakage()).replace('.', ','));
+        escreve.write(("\nL1I; " + readL1I + "; ; " + (readL1I) + "; " + cL1I.cPar.somaLeakage()).replace('.', ','));
+        escreve.write(("\nL1Total; " + (readL1D + readL1I) + "; " + writeL1D + "; " + (readL1D + writeL1D + readL1I) + "; " + (cL1D.cPar.somaLeakage() + cL1I.cPar.somaLeakage())).replace('.', ','));
+        escreve.write(("\nL2; " + readL2 + "; " + writeL2 + "; " + (readL2 + writeL2) + "; " + cL2.cPar.somaLeakage()).replace('.', ','));
+        escreve.write(("\nTotal; " + (readL1D + readL1I + readL2) + "; " + (writeL1D + writeL2) + "; " + (readL1D + writeL1D + readL1I + readL2 + writeL2) + "; " + (cL1D.cPar.somaLeakage() + cL1I.cPar.somaLeakage() + cL2.cPar.somaLeakage())).replace('.', ','));
 
         escreve.close();
         w.close();

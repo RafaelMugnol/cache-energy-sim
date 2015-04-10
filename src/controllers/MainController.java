@@ -33,7 +33,7 @@ public class MainController {
 
         iView = new InicialView(this);
         iView.setVisible(true);
-
+        cacheMemory =  new CacheMemory();
     }
     
 
