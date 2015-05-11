@@ -1,4 +1,3 @@
-
 package models;
 
 import java.io.BufferedReader;
@@ -203,305 +202,194 @@ public class CacheMemory {
 
     public void escArquivoL1D(File file) {
         String linha;
-        try {
-            FileReader ler = new FileReader(file);
-            BufferedReader buff = new BufferedReader(ler);
-            cL1D.cPar = new CacheParameters();
-            while (buff.ready()) {
-                linha = buff.readLine();
-                if (linha.contains("Total cache size (bytes):")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setCacheSize(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Number of banks:")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setBanks(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Associativity:")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setAssociativity(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Block size (bytes):")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setBlockSize(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Read/write Ports:")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setrWPorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Read ports:")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setrPorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Write ports:")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setwPorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Technology size (nm):")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setTechSize(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Access time (ns):")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setAccessTime(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Cycle time (ns):")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setCycleTime(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Precharge Delay (ns):")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setPrechargeDelay(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Activate Energy (nJ):")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setActivateEnergy(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Read Energy (nJ):")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setrEnergy(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Write Energy (nJ):")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setwEnergy(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Precharge Energy (nJ):")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setPrechargeEnergy(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Leakage Power Closed Page (mW):")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setPowerClosedPage(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Leakage Power Open Page (mW):")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setPowerOpenPage(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Leakage Power I/O (mW):")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setPowerIO(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Refresh power (mW):")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setRefreshPower(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Cache height x width (mm):")) {
-                    String[] array = linha.split(":");
-                    String[] array2 = array[array.length - 1].split("x");
-                    cL1D.cPar.setCacheHeight(Double.parseDouble(array2[array2.length - 2]));
-                    cL1D.cPar.setCacheWidth(Double.parseDouble(array2[array2.length - 1]));
-                } else if (linha.contains("Block size")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setBlockSise(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Read only ports")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setReadOnlyPorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Write only ports")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setWriteOnlyPorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Read write ports")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setReadWritePorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Single ended read ports")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setSingleEndedReadPorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Cache banks")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setCacheBanks(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Technology")) {
-                    String[] array = linha.split(":");
-                    cL1D.cPar.setTechnology(Double.parseDouble(array[array.length - 1]));
+
+        cL1D.cPar = new CacheParameters();
+        if (file.getName().split(".")[1].equals("cacti")) {
+            try {
+                FileReader ler = new FileReader(file);
+                BufferedReader buff = new BufferedReader(ler);
+                while (buff.ready()) {
+                    linha = buff.readLine();
+                    if (linha.contains("Cache size:")) {
+                        String[] array = linha.split(":");
+                        cL1D.cPar.setCacheSize(Double.parseDouble(array[array.length - 1]));
+                    } else if (linha.contains("Block size:")) {
+                        String[] array = linha.split(":");
+                        cL1D.cPar.setBlockSize(Double.parseDouble(array[array.length - 1]));
+
+                    } else if (linha.contains("Associativity")) {
+                        String[] array = linha.split(":");
+                        cL1D.cPar.setAssociativity(Double.parseDouble(array[array.length - 1]));
+
+                    } else if (linha.contains("Total leakage power of a bank (mW):")) {
+                        String[] array = linha.split(":");
+                        cL1D.cPar.setLeakage(Double.parseDouble(array[array.length - 1]));
+
+                    } else if (linha.contains("Total dynamic read energy per access (nJ):")) {
+                        String[] array = linha.split(":");
+                        cL1D.cPar.setwEnergy(Double.parseDouble(array[array.length - 1]));
+                        cL1D.cPar.setrEnergy(Double.parseDouble(array[array.length - 1]));
+                    }
                 }
+            } catch (FileNotFoundException ex) {
+                // 
+            } catch (IOException ex) {
 
             }
-        } catch (FileNotFoundException ex) {
-            // 
-        } catch (IOException ex) {
-            //
-        }
+        } else {
+            try {
+                FileReader ler = new FileReader(file);
+                BufferedReader buff = new BufferedReader(ler);
+                while (buff.ready()) {
+                    linha = buff.readLine();
+                    if (linha.contains("Capacity   :")) {
+                        cL1D.cPar.setCacheSize(Double.parseDouble(linha.replaceAll("[^0-9]", "")));
+                    } else if (linha.contains("Cache Line Size:")) {
+                        cL1D.cPar.setBlockSize(Double.parseDouble(linha.replaceAll("[^0-9]", "")));
+                    } else if (linha.contains("Cache Associativity:")) {
+                        cL1D.cPar.setAssociativity(Double.parseDouble(linha.replaceAll("[^0-9]", "")));
+                    } else if (linha.contains("- Cache Total Leakage Power ")) {
+                        cL1D.cPar.setLeakage(Double.parseDouble(linha.replaceAll("[^0-9]", "")));
+                    } else if (linha.contains("Cache Write Dynamic Energy")) {
+                        cL1D.cPar.setwEnergy(Double.parseDouble(linha.replaceAll("[^0-9]", "")));
+                    } else if (linha.contains("Cache Hit Dynamic Energy")) {
+                        cL1D.cPar.setrEnergy(Double.parseDouble(linha.replaceAll("[^0-9]", "")));
+                    }
+                }
+            } catch (FileNotFoundException ex) {
+                // 
+            } catch (IOException ex) {
 
+            }
+        }
     }
 
-    public void escArquivoL1I(File file) {
-        String linha;
-        try {
-            FileReader ler = new FileReader(file);
-            BufferedReader buff = new BufferedReader(ler);
-            cL1I.cPar = new CacheParameters();
-            while (buff.ready()) {
-                linha = buff.readLine();
-                if (linha.contains("Total cache size (bytes):")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setCacheSize(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Number of banks:")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setBanks(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Associativity:")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setAssociativity(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Block size (bytes):")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setBlockSize(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Read/write Ports:")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setrWPorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Read ports:")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setrPorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Write ports:")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setwPorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Technology size (nm):")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setTechSize(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Access time (ns):")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setAccessTime(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Cycle time (ns):")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setCycleTime(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Precharge Delay (ns):")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setPrechargeDelay(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Activate Energy (nJ):")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setActivateEnergy(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Read Energy (nJ):")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setrEnergy(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Write Energy (nJ):")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setwEnergy(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Precharge Energy (nJ):")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setPrechargeEnergy(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Leakage Power Closed Page (mW):")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setPowerClosedPage(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Leakage Power Open Page (mW):")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setPowerOpenPage(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Leakage Power I/O (mW):")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setPowerIO(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Refresh power (mW):")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setRefreshPower(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Cache height x width (mm):")) {
-                    String[] array = linha.split(":");
-                    String[] array2 = array[array.length - 1].split("x");
-                    cL1I.cPar.setCacheHeight(Double.parseDouble(array2[array2.length - 2]));
-                    cL1I.cPar.setCacheWidth(Double.parseDouble(array2[array2.length - 1]));
-                } else if (linha.contains("Block size")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setBlockSise(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Read only ports")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setReadOnlyPorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Write only ports")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setWriteOnlyPorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Read write ports")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setReadWritePorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Single ended read ports")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setSingleEndedReadPorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Cache banks")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setCacheBanks(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Technology")) {
-                    String[] array = linha.split(":");
-                    cL1I.cPar.setTechnology(Double.parseDouble(array[array.length - 1]));
-                } 
-            }
-        } catch (FileNotFoundException ex) {
 
-        } catch (IOException ex) {
-            //
+public void escArquivoL1I(File file) {
+        String linha;
+
+        cL1I.cPar = new CacheParameters();
+        if (file.getName().split(".")[1].equals("cacti")) {
+            try {
+                FileReader ler = new FileReader(file);
+                BufferedReader buff = new BufferedReader(ler);
+                while (buff.ready()) {
+                    linha = buff.readLine();
+                    if (linha.contains("Cache size:")) {
+                        String[] array = linha.split(":");
+                        cL1I.cPar.setCacheSize(Double.parseDouble(array[array.length - 1]));
+                    } else if (linha.contains("Block size:")) {
+                        String[] array = linha.split(":");
+                        cL1I.cPar.setBlockSize(Double.parseDouble(array[array.length - 1]));
+
+                    } else if (linha.contains("Associativity")) {
+                        String[] array = linha.split(":");
+                        cL1I.cPar.setAssociativity(Double.parseDouble(array[array.length - 1]));
+
+                    } else if (linha.contains("Total leakage power of a bank (mW):")) {
+                        String[] array = linha.split(":");
+                        cL1I.cPar.setLeakage(Double.parseDouble(array[array.length - 1]));
+
+                    } else if (linha.contains("Total dynamic read energy per access (nJ):")) {
+                        String[] array = linha.split(":");
+                        cL1I.cPar.setwEnergy(Double.parseDouble(array[array.length - 1]));
+                        cL1I.cPar.setrEnergy(Double.parseDouble(array[array.length - 1]));
+                    }
+                }
+            } catch (FileNotFoundException ex) {
+                // 
+            } catch (IOException ex) {
+
+            }
+        } else {
+            try {
+                FileReader ler = new FileReader(file);
+                BufferedReader buff = new BufferedReader(ler);
+                while (buff.ready()) {
+                    linha = buff.readLine();
+                    if (linha.contains("Capacity   :")) {
+                        cL1I.cPar.setCacheSize(Double.parseDouble(linha.replaceAll("[^0-9]", "")));
+                    } else if (linha.contains("Cache Line Size:")) {
+                        cL1I.cPar.setBlockSize(Double.parseDouble(linha.replaceAll("[^0-9]", "")));
+                    } else if (linha.contains("Cache Associativity:")) {
+                        cL1I.cPar.setAssociativity(Double.parseDouble(linha.replaceAll("[^0-9]", "")));
+                    } else if (linha.contains("- Cache Total Leakage Power ")) {
+                        cL1I.cPar.setLeakage(Double.parseDouble(linha.replaceAll("[^0-9]", "")));
+                    } else if (linha.contains("Cache Write Dynamic Energy")) {
+                        cL1I.cPar.setwEnergy(Double.parseDouble(linha.replaceAll("[^0-9]", "")));
+                    } else if (linha.contains("Cache Hit Dynamic Energy")) {
+                        cL1I.cPar.setrEnergy(Double.parseDouble(linha.replaceAll("[^0-9]", "")));
+                    }
+                }
+            } catch (FileNotFoundException ex) {
+                // 
+            } catch (IOException ex) {
+
+            }
         }
     }
 
     public void escArquivoL2(File file) {
+String linha;
 
-        String linha;
-        try {
-            FileReader ler = new FileReader(file);
-            BufferedReader buff = new BufferedReader(ler);
-            cL2.cPar = new CacheParameters();
-            while (buff.ready()) {
-                linha = buff.readLine();
-                if (linha.contains("Total cache size (bytes):")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setCacheSize(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Number of banks:")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setBanks(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Associativity:")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setAssociativity(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Block size (bytes):")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setBlockSize(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Read/write Ports:")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setrWPorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Read ports:")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setrPorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Write ports:")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setwPorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Technology size (nm):")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setTechSize(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Access time (ns):")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setAccessTime(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Cycle time (ns):")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setCycleTime(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Precharge Delay (ns):")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setPrechargeDelay(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Activate Energy (nJ):")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setActivateEnergy(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Read Energy (nJ):")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setrEnergy(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Write Energy (nJ):")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setwEnergy(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Precharge Energy (nJ):")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setPrechargeEnergy(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Leakage Power Closed Page (mW):")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setPowerClosedPage(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Leakage Power Open Page (mW):")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setPowerOpenPage(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Leakage Power I/O (mW):")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setPowerIO(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Refresh power (mW):")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setRefreshPower(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Cache height x width (mm):")) {
-                    String[] array = linha.split(":");
-                    String[] array2 = array[array.length - 1].split("x");
-                    cL2.cPar.setCacheHeight(Double.parseDouble(array2[array2.length - 2]));
-                    cL2.cPar.setCacheWidth(Double.parseDouble(array2[array2.length - 1]));
-                } else if (linha.contains("Block size")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setBlockSise(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Read only ports")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setReadOnlyPorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Write only ports")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setWriteOnlyPorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Read write ports")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setReadWritePorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Single ended read ports")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setSingleEndedReadPorts(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Cache banks")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setCacheBanks(Double.parseDouble(array[array.length - 1]));
-                } else if (linha.contains("Technology")) {
-                    String[] array = linha.split(":");
-                    cL2.cPar.setTechnology(Double.parseDouble(array[array.length - 1]));
+        cL2.cPar = new CacheParameters();
+        if (file.getName().split(".")[1].equals("cacti")) {
+            try {
+                FileReader ler = new FileReader(file);
+                BufferedReader buff = new BufferedReader(ler);
+                while (buff.ready()) {
+                    linha = buff.readLine();
+                    if (linha.contains("Cache size:")) {
+                        String[] array = linha.split(":");
+                        cL2.cPar.setCacheSize(Double.parseDouble(array[array.length - 1]));
+                    } else if (linha.contains("Block size:")) {
+                        String[] array = linha.split(":");
+                        cL2.cPar.setBlockSize(Double.parseDouble(array[array.length - 1]));
+
+                    } else if (linha.contains("Associativity")) {
+                        String[] array = linha.split(":");
+                        cL2.cPar.setAssociativity(Double.parseDouble(array[array.length - 1]));
+
+                    } else if (linha.contains("Total leakage power of a bank (mW):")) {
+                        String[] array = linha.split(":");
+                        cL2.cPar.setLeakage(Double.parseDouble(array[array.length - 1]));
+
+                    } else if (linha.contains("Total dynamic read energy per access (nJ):")) {
+                        String[] array = linha.split(":");
+                        cL2.cPar.setwEnergy(Double.parseDouble(array[array.length - 1]));
+                        cL2.cPar.setrEnergy(Double.parseDouble(array[array.length - 1]));
+                    }
                 }
+            } catch (FileNotFoundException ex) {
+                // 
+            } catch (IOException ex) {
 
             }
-        } catch (FileNotFoundException ex) {
+        } else {
+            try {
+                FileReader ler = new FileReader(file);
+                BufferedReader buff = new BufferedReader(ler);
+                while (buff.ready()) {
+                    linha = buff.readLine();
+                    if (linha.contains("Capacity   :")) {
+                        cL2.cPar.setCacheSize(Double.parseDouble(linha.replaceAll("[^0-9]", "")));
+                    } else if (linha.contains("Cache Line Size:")) {
+                        cL2.cPar.setBlockSize(Double.parseDouble(linha.replaceAll("[^0-9]", "")));
+                    } else if (linha.contains("Cache Associativity:")) {
+                        cL2.cPar.setAssociativity(Double.parseDouble(linha.replaceAll("[^0-9]", "")));
+                    } else if (linha.contains("- Cache Total Leakage Power ")) {
+                        cL2.cPar.setLeakage(Double.parseDouble(linha.replaceAll("[^0-9]", "")));
+                    } else if (linha.contains("Cache Write Dynamic Energy")) {
+                        cL2.cPar.setwEnergy(Double.parseDouble(linha.replaceAll("[^0-9]", "")));
+                    } else if (linha.contains("Cache Hit Dynamic Energy")) {
+                        cL2.cPar.setrEnergy(Double.parseDouble(linha.replaceAll("[^0-9]", "")));
+                    }
+                }
+            } catch (FileNotFoundException ex) {
+                // 
+            } catch (IOException ex) {
 
-        } catch (IOException ex) {
-            //
+            }
         }
     }
 
@@ -546,14 +434,13 @@ public class CacheMemory {
     public void salvaArquivo(File file) throws IOException {
         FileWriter w = new FileWriter(file.getPath());
         BufferedWriter escreve = new BufferedWriter(w);
-        //String str;
-        //str.replace('.', ',');
+        
         escreve.write(" ; Dynamic Read; Dynamic Write; Dynamic Total; Leakage (Static)");
-        escreve.write(("\nL1D; " + readL1D + "; " + writeL1D + "; " + (readL1D + writeL1D) + "; " + cL1D.cPar.somaLeakage()).replace('.', ','));
-        escreve.write(("\nL1I; " + readL1I + "; ; " + (readL1I) + "; " + cL1I.cPar.somaLeakage()).replace('.', ','));
-        escreve.write(("\nL1Total; " + (readL1D + readL1I) + "; " + writeL1D + "; " + (readL1D + writeL1D + readL1I) + "; " + (cL1D.cPar.somaLeakage() + cL1I.cPar.somaLeakage())).replace('.', ','));
-        escreve.write(("\nL2; " + readL2 + "; " + writeL2 + "; " + (readL2 + writeL2) + "; " + cL2.cPar.somaLeakage()).replace('.', ','));
-        escreve.write(("\nTotal; " + (readL1D + readL1I + readL2) + "; " + (writeL1D + writeL2) + "; " + (readL1D + writeL1D + readL1I + readL2 + writeL2) + "; " + (cL1D.cPar.somaLeakage() + cL1I.cPar.somaLeakage() + cL2.cPar.somaLeakage())).replace('.', ','));
+        escreve.write(("\nL1D; " + readL1D + "; " + writeL1D + "; " + (readL1D + writeL1D) + "; " + cL1D.cPar.getLeakage()).replace('.', ','));
+        escreve.write(("\nL1I; " + readL1I + "; ; " + (readL1I) + "; " + cL1I.cPar.getLeakage()).replace('.', ','));
+        escreve.write(("\nL1Total; " + (readL1D + readL1I) + "; " + writeL1D + "; " + (readL1D + writeL1D + readL1I) + "; " + (cL1D.cPar.getLeakage() + cL1I.cPar.getLeakage())).replace('.', ','));
+        escreve.write(("\nL2; " + readL2 + "; " + writeL2 + "; " + (readL2 + writeL2) + "; " + cL2.cPar.getLeakage()).replace('.', ','));
+        escreve.write(("\nTotal; " + (readL1D + readL1I + readL2) + "; " + (writeL1D + writeL2) + "; " + (readL1D + writeL1D + readL1I + readL2 + writeL2) + "; " + (cL1D.cPar.getLeakage() + cL1I.cPar.getLeakage() + cL2.cPar.getLeakage())).replace('.', ','));
 
         escreve.close();
         w.close();
