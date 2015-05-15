@@ -39,4 +39,8 @@ public class CacheStatsL2 extends CacheStats{
     public void setWriteMiss() {
         this.writeMiss = 0;
     }
+    
+     public void setWriteMisses(long writeMiss) {
+        this.writeMiss = writeMiss;
+    }
 }

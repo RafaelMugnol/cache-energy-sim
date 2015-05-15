@@ -37,74 +37,93 @@ public class MainController {
     }
     
 
-    public void escArquivoConfig() {
+    public String escArquivoConfig() {
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("Memory File (.ini)", "ini");
-
+        String nome = "";
         int returnVal = this.iView.showFileChooserDialog(filtro);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = this.iView.getSelectedFile();
-            //mView.setTextA(file.getName());
+            nome = file.getName();
             cacheMemory.escArquivoConfig(file);
 
         }
-
+        return nome;
     }
-
-    public void escArquivoStats() {
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Memory File (.txt)", "txt");
-
+    
+    public String escArquivoVal() {
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Valgrind File (.txt)", "txt");
+        String nome = "";
         int returnVal = this.iView.showFileChooserDialog(filtro);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = this.iView.getSelectedFile();
-            //mView.setTextA(file.getName());
-            cacheMemory.escArquivoStats(file);
-        }
+            nome = file.getName();
+            cacheMemory.escArquivoValgrind(file);
 
+        }
+        return nome;
     }
 
-    public void abreMainView() {
+    public String escArquivoStats() {
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Memory File (.txt)", "txt");
+        String nome = "";
+        int returnVal = this.iView.showFileChooserDialog(filtro);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = this.iView.getSelectedFile();
+            nome = file.getName();
+            cacheMemory.escArquivoStats(file);
+        }
+        return nome;
+    }
+
+    public void abreMainView(boolean ll) {
         
-        this.mView = new MainView(this, cacheMemory.matInfo());
+        this.mView = new MainView(this, cacheMemory.matInfo(), ll);
         mView.setVisible(true);
     }
 
-    public void escArquivoL1D() {
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Memory File (.cacti)", "cacti");
+    public String escArquivoL1D() {
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Memory File", "cacti", "nvsim");
 
         int returnVal = this.mView.showFileChooserDialog(filtro);
+        String nome = "";
         if (returnVal == JFileChooser.APPROVE_OPTION) {
+            
             File file = this.mView.getSelectedFile();
+            nome = file.getName();
             //mView.setTextA(file.getName());
 
             cacheMemory.escArquivoL1D(file);
 
         }
+        return (nome);
     }
     
-    public void escArquivoL1I() {
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Memory File (.cacti)", "cacti");
-
+    public String escArquivoL1I() {
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Memory File (.cacti)", "cacti", "nvsim");
+        String nome = "";
         int returnVal = this.mView.showFileChooserDialog(filtro);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = this.mView.getSelectedFile();
             //mView.setTextA(file.getName());
-
+            nome = file.getName();
             cacheMemory.escArquivoL1I(file);
 
         }
+        return nome;
     }
     
-    public void escArquivoL2() {
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Memory File (.cacti)", "cacti");
-
+    public String escArquivoL2() {
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Memory File (.cacti)", "cacti", "nvsim");
+        String nome = "";
         int returnVal = this.mView.showFileChooserDialog(filtro);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = this.mView.getSelectedFile();
             //mView.setTextA(file.getName());
-
+            nome = file.getName();
             cacheMemory.escArquivoL2(file);
 
         }
+        return nome;
     }
 
    public double[] returnEnergy(){

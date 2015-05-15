@@ -27,11 +27,14 @@ public class MainView extends javax.swing.JFrame {
      *
      * @param cont
      */
-    public MainView(MainController cont, String mat[][]) {
+    public MainView(MainController cont, String mat[][], boolean ll) {
         this.controller = cont;
         this.fChooser = new JFileChooser();
         
         initComponents();
+        if(ll){
+            ll2.setText("LL");
+        }
         this.preencheDados(mat);
     }
 
@@ -54,7 +57,7 @@ public class MainView extends javax.swing.JFrame {
         l1dc = new javax.swing.JTextField();
         l1do = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
+        ll2 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         l2t = new javax.swing.JLabel();
         l2a = new javax.swing.JLabel();
@@ -62,15 +65,6 @@ public class MainView extends javax.swing.JFrame {
         l2s = new javax.swing.JLabel();
         l2c = new javax.swing.JTextField();
         l2o = new javax.swing.JButton();
-        jPanel17 = new javax.swing.JPanel();
-        jLabel41 = new javax.swing.JLabel();
-        jPanel18 = new javax.swing.JPanel();
-        l3t = new javax.swing.JLabel();
-        l3a = new javax.swing.JLabel();
-        l3b = new javax.swing.JLabel();
-        l3s = new javax.swing.JLabel();
-        l3c = new javax.swing.JTextField();
-        l3o = new javax.swing.JButton();
         jPanel19 = new javax.swing.JPanel();
         jLabel46 = new javax.swing.JLabel();
         jPanel20 = new javax.swing.JPanel();
@@ -136,7 +130,7 @@ public class MainView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        l1dc.setEnabled(false);
+        l1dc.setEditable(false);
         l1dc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 l1dcActionPerformed(evt);
@@ -189,8 +183,8 @@ public class MainView extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jLabel11.setText("L2");
+        ll2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        ll2.setText("L2");
 
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -233,7 +227,7 @@ public class MainView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        l2c.setEnabled(false);
+        l2c.setEditable(false);
         l2c.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 l2cActionPerformed(evt);
@@ -253,8 +247,8 @@ public class MainView extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(77, Short.MAX_VALUE)
-                .addComponent(jLabel11)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ll2)
                 .addGap(71, 71, 71)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -278,97 +272,8 @@ public class MainView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel11)
+                .addComponent(ll2)
                 .addGap(51, 51, 51))
-        );
-
-        jPanel17.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jLabel41.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jLabel41.setText("L3");
-
-        jPanel18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        l3t.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        l3t.setText("Type:");
-
-        l3a.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        l3a.setText("Assoc:");
-
-        l3b.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        l3b.setText("Block Size:");
-
-        l3s.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        l3s.setText("Size:");
-
-        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
-        jPanel18.setLayout(jPanel18Layout);
-        jPanel18Layout.setHorizontalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel18Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(l3t)
-                    .addComponent(l3a)
-                    .addComponent(l3b)
-                    .addComponent(l3s))
-                .addContainerGap(113, Short.MAX_VALUE))
-        );
-        jPanel18Layout.setVerticalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel18Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(l3t)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(l3s)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(l3b)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(l3a)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        l3c.setEnabled(false);
-        l3c.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                l3cActionPerformed(evt);
-            }
-        });
-
-        l3o.setText("Open Memory File");
-        l3o.setEnabled(false);
-
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(jLabel41)
-                .addGap(79, 79, 79)
-                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(l3c, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(l3o, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(l3c, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(l3o))
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jLabel41))
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel19.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -417,7 +322,7 @@ public class MainView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        l1ic.setEnabled(false);
+        l1ic.setEditable(false);
         l1ic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 l1icActionPerformed(evt);
@@ -497,16 +402,18 @@ public class MainView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(l1d, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(calc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(calc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(l1d, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -519,10 +426,8 @@ public class MainView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(calc, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(calc, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -537,23 +442,19 @@ public class MainView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_l1icActionPerformed
 
-    private void l3cActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_l3cActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_l3cActionPerformed
-
     private void l1ioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_l1ioActionPerformed
-        controller.escArquivoL1I();
+        l1ic.setText(controller.escArquivoL1I());
         l2o.setEnabled(true);
        
     }//GEN-LAST:event_l1ioActionPerformed
 
     private void l2oActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_l2oActionPerformed
-        controller.escArquivoL2();
+        l2c.setText(controller.escArquivoL2());
         calc.setEnabled(true);
     }//GEN-LAST:event_l2oActionPerformed
 
     private void l1doActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_l1doActionPerformed
-        controller.escArquivoL1D();
+        l1dc.setText(controller.escArquivoL1D());
         
         l1io.setEnabled(true);
     }//GEN-LAST:event_l1doActionPerformed
@@ -570,8 +471,6 @@ public class MainView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton calc;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
@@ -579,8 +478,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
@@ -605,23 +502,22 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton l2o;
     private javax.swing.JLabel l2s;
     private javax.swing.JLabel l2t;
-    private javax.swing.JLabel l3a;
-    private javax.swing.JLabel l3b;
-    private javax.swing.JTextField l3c;
-    private javax.swing.JButton l3o;
-    private javax.swing.JLabel l3s;
-    private javax.swing.JLabel l3t;
+    private javax.swing.JLabel ll2;
     // End of variables declaration//GEN-END:variables
 
     public int showFileChooserDialog(FileNameExtensionFilter filtro) {
         fChooser.setAcceptAllFileFilterUsed(false);
         fChooser.addChoosableFileFilter(filtro);
-        return fChooser.showOpenDialog(MainView.this);
+        int r = fChooser.showOpenDialog(MainView.this);
+        fChooser.removeChoosableFileFilter(filtro);
+        return r;
     }
     public int showFileSaveDialog(FileNameExtensionFilter filtro){
         fChooser.setAcceptAllFileFilterUsed(false);
         fChooser.addChoosableFileFilter(filtro);
-        return fChooser.showSaveDialog(MainView.this);
+        int r = fChooser.showSaveDialog(MainView.this);
+        fChooser.removeChoosableFileFilter(filtro);
+        return r;
     }
     
     
@@ -653,14 +549,7 @@ public class MainView extends javax.swing.JFrame {
                     l2b.setText("Block Size: " + mat[2][2]);
                     l2a.setText("Assoc: " + mat[2][3]);
                     l2c.setEnabled(true);
-                    if (mat.length >= 4) {
-                        l3t.setText("Type: " + mat[3][0]);
-                        l3s.setText("Size: " + mat[3][1]);
-                        l3b.setText("Block Size: " + mat[3][2]);
-                        l3a.setText("Assoc: " + mat[3][3]);
-                        l3c.setEnabled(true);
-                        l3o.setEnabled(true);
-                    }
+                    
                 }
             }
         }
