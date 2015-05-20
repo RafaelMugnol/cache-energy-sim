@@ -32,7 +32,7 @@ public class Graphic {
 
     public static ChartPanel criaGrafico(CategoryDataset ds) {
       
-        JFreeChart graf = ChartFactory.createBarChart3D("Cache Energy Graphic", "Memory Type:" , "Power Consumption", ds, PlotOrientation.VERTICAL, true, true, true);
+        JFreeChart graf = ChartFactory.createStackedBarChart3D("Cache Energy Graphic", "Memory Type:" , "Power Consumption", ds, PlotOrientation.VERTICAL, true, true, true);
 
         ChartPanel myChartPanel = new ChartPanel(graf, true);
         myChartPanel.setVisible(true);
