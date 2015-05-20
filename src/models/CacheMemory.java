@@ -204,16 +204,16 @@ public class CacheMemory {
         String linha;
         try {
             cL1D = new CacheStatsL1Dados();
-                    cL1I = new CacheStatsL1Inst();
-                    cL2 = new CacheStatsL2();
-                    
+            cL1I = new CacheStatsL1Inst();
+            cL2 = new CacheStatsL2();
+
             FileReader ler = new FileReader(file);
             BufferedReader buff = new BufferedReader(ler);
             while (buff.ready()) {
                 linha = buff.readLine();
                 if (linha.contains("summary:")) {
                     String array[] = linha.split(" ");
-                    
+
                     //l1i
                     cL1I.setReadMisses(Long.parseLong(array[4]));
                     cL1I.setReadHits(Long.parseLong(array[1]));
@@ -234,20 +234,17 @@ public class CacheMemory {
                     cL2.setWriteMisses(Long.parseLong(array[9]));
                     cL2.setWriteHits(total - cL2.getWriteMiss());
                     cL2.setMissRate(cL2.getWriteMiss() / total);
-                }
-                else if (linha.contains("desc: I1")){
+                } else if (linha.contains("desc: I1")) {
                     String array[] = linha.split(" ");
                     cL1I.setSize(Long.parseLong(array[3]));
                     cL1I.setBlock_size(Long.parseLong(array[5]));
                     cL1I.setAssoc(Long.parseLong(array[7].replaceAll("[^0-9]", "")));
-                }
-                else if (linha.contains("desc: D1 cache:")){
+                } else if (linha.contains("desc: D1 cache:")) {
                     String array[] = linha.split(" ");
                     cL1D.setSize(Long.parseLong(array[3]));
                     cL1D.setBlock_size(Long.parseLong(array[5]));
                     cL1D.setAssoc(Long.parseLong(array[7].replaceAll("[^0-9]", "")));
-                }
-                else if (linha.contains("desc: LL cache:")){
+                } else if (linha.contains("desc: LL cache:")) {
                     String array[] = linha.split(" ");
                     cL2.setSize(Long.parseLong(array[3]));
                     cL2.setBlock_size(Long.parseLong(array[5]));
@@ -255,9 +252,9 @@ public class CacheMemory {
                 }
             }
             cL2.setType("--");
-             cL1D.setType("--");
-             cL1I.setType("--");
-             nCache = 3;
+            cL1D.setType("--");
+            cL1I.setType("--");
+            nCache = 3;
         } catch (FileNotFoundException ex) {
 
         } catch (IOException ex) {
@@ -270,7 +267,7 @@ public class CacheMemory {
         String linha;
 
         cL1D.cPar = new CacheParameters();
-        
+
         String sd = file.getName();
         if (file.getName().contains("cacti")) {
             try {
@@ -287,8 +284,8 @@ public class CacheMemory {
 
                     } else if (linha.contains("Associativity")) {
                         String[] array = linha.split(":");
-                        if(array[array.length - 1].matches("[0-9]")){
-                        cL1D.cPar.setAssociativity(Double.parseDouble(array[array.length - 1]));
+                        if (array[array.length - 1].matches("[0-9]")) {
+                            cL1D.cPar.setAssociativity(Double.parseDouble(array[array.length - 1]));
                         }
                     } else if (linha.contains("Total leakage power of a bank (mW):")) {
                         String[] array = linha.split(":");
@@ -352,8 +349,8 @@ public class CacheMemory {
 
                     } else if (linha.contains("Associativity")) {
                         String[] array = linha.split(":");
-                        if(array[array.length - 1].matches("[0-9]")){
-                        cL1I.cPar.setAssociativity(Double.parseDouble(array[array.length - 1]));
+                        if (array[array.length - 1].matches("[0-9]")) {
+                            cL1I.cPar.setAssociativity(Double.parseDouble(array[array.length - 1]));
                         }
                     } else if (linha.contains("Total leakage power of a bank (mW):")) {
                         String[] array = linha.split(":");
@@ -417,8 +414,8 @@ public class CacheMemory {
 
                     } else if (linha.contains("Associativity")) {
                         String[] array = linha.split(":");
-                        if(array[array.length - 1].matches("[0-9]")){
-                        cL2.cPar.setAssociativity(Double.parseDouble(array[array.length - 1]));
+                        if (array[array.length - 1].matches("[0-9]")) {
+                            cL2.cPar.setAssociativity(Double.parseDouble(array[array.length - 1]));
                         }
                     } else if (linha.contains("Total leakage power of a bank (mW):")) {
                         String[] array = linha.split(":");
@@ -502,7 +499,7 @@ public class CacheMemory {
     }
 
     public void salvaArquivo(File file) throws IOException {
-        FileWriter w = new FileWriter(file.getPath()+".csv");
+        FileWriter w = new FileWriter(file.getPath() + ".csv");
         BufferedWriter escreve = new BufferedWriter(w);
 
         escreve.write(" ; Dynamic Read; Dynamic Write; Dynamic Total; Leakage (Static)");
@@ -514,5 +511,15 @@ public class CacheMemory {
 
         escreve.close();
         w.close();
+    }
+
+    public double[] vetGrafico() {
+        double vet[] = new double[4];
+        vet[0] = readL1D + writeL1D;
+        vet[1] = readL1I;
+        vet[2] = readL2 + writeL2;
+        vet[3] = readL1D + writeL1D + readL1I + readL2 + writeL2;
+
+        return vet;
     }
 }

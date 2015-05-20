@@ -274,7 +274,8 @@ public class InicialView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     public int showFileChooserDialog(FileNameExtensionFilter filtro) {
         fChooser.setAcceptAllFileFilterUsed(false);
-
+        File pasta = new File("C:/Users/Rafael/Documents/Rafael/Programas.java/cache-energy-sim/arquivos");
+        fChooser.setCurrentDirectory(pasta);
         fChooser.addChoosableFileFilter(filtro);
         int r = fChooser.showOpenDialog(InicialView.this);
         fChooser.removeChoosableFileFilter(filtro);

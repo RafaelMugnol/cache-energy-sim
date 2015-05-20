@@ -14,6 +14,8 @@ import models.CacheParameters;
 import models.CacheStatsL1Dados;
 import models.CacheStatsL1Inst;
 import models.CacheStatsL2;
+import models.Graphic;
+import views.GraphicView;
 import views.InicialView;
 import views.MainView;
 
@@ -40,6 +42,7 @@ public class MainController {
     public String escArquivoConfig() {
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("Memory File (.ini)", "ini");
         String nome = "";
+        
         int returnVal = this.iView.showFileChooserDialog(filtro);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = this.iView.getSelectedFile();
@@ -136,5 +139,11 @@ public class MainController {
        
        int returnVal = this.mView.showFileSaveDialog(filtro);
        cacheMemory.salvaArquivo(this.mView.getSelectedFile());
+   }
+   
+   public void geraGrafico(){
+       
+       GraphicView gv = new GraphicView(Graphic.criaGrafico(Graphic.createDataset(cacheMemory.returnEnergy())));
+       gv.setVisible(true);
    }
 }
